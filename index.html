@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Check if an MTG Arena deck is legal in Historic Pauper." />
+    <title>Historic Pauper Deck Checker</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Historic Pauper Deck Checker</h1>
+        <p class="lede">
+          Paste an MTG Arena deck export to check it against the Historic Pauper rules: every card must be
+          legal in Historic and craftable with a common wildcard on Arena.
+        </p>
+      </header>
+
+      <form id="form">
+        <label for="deck">Deck list (Arena export)</label>
+        <textarea id="deck" spellcheck="false" placeholder="Deck
+4 Kessig Flamebreather (MID) 150
+4 Burst Lightning (ZNR) 137
+...
+
+Sideboard
+2 Pyroblast (EMA) 142"></textarea>
+        <div class="actions">
+          <button type="submit" id="check" disabled>Loading card pool…</button>
+          <span id="pool-info" class="muted"></span>
+        </div>
+      </form>
+
+      <section id="result" aria-live="polite"></section>
+
+      <details class="rules">
+        <summary>Rules</summary>
+        <ul>
+          <li>All commons on MTG Arena that are legal in Historic, including rebalanced and Alchemy cards.</li>
+          <li>
+            A card is legal if it can be crafted with a common wildcard; you may play an uncommon or rare version of
+            it. The paper Pauper ban list does not apply.
+          </li>
+          <li>Main deck of at least 60 cards, sideboard of up to 15, at most 4 copies of any card except basic lands.</li>
+        </ul>
+        <h3>Banned</h3>
+        <ul id="banned"></ul>
+        <p class="muted">All banned in Midweek Magic as of 5 May 2026.</p>
+        <h3>Not legal in Historic</h3>
+        <ul id="historic-illegal"></ul>
+        <p class="muted">Not legal in Community Bo3 HP, though they were allowed in Midweek Magic.</p>
+      </details>
+
+      <footer class="muted">Card data from <a href="https://scryfall.com">Scryfall</a>.</footer>
+    </main>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
